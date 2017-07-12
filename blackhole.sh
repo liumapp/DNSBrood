@@ -2,7 +2,7 @@
 HOME_DIR=/usr/local/blackhole
 PATH=$PATH:$HOME_DIR
 export PATH
-JVM_OPTION=""
+JVM_OPTION="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
 
 function doCache()
 {
