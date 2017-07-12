@@ -38,7 +38,9 @@ public class CustomAnswerPatternProvider implements AnswerProvider {
      * address.
      */
     public static final String DO_NOTHING = "do_nothing";
+
     private static final String FAKE_MX_PREFIX = "mail.";
+
     private static final String FAKE_CANME_PREFIX = "cname.";
 
     @Autowired
