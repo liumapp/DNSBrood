@@ -1,6 +1,8 @@
 package com.liumapp.DNSBrood.antipollution;
 
 import com.liumapp.DNSBrood.config.Configure;
+import com.liumapp.DNSQueen.worker.job.ShutDownAble;
+import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;

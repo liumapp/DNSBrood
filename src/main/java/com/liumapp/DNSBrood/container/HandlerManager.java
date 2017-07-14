@@ -1,5 +1,6 @@
 package com.liumapp.DNSBrood.container;
 
+import com.liumapp.DNSBrood.answer.PostAnswerHandler;
 import com.liumapp.DNSBrood.answer.PreAnswerHandler;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
