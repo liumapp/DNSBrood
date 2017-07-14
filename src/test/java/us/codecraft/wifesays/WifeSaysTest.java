@@ -13,43 +13,43 @@ import java.io.IOException;
  */
 public class WifeSaysTest {
 
-    @Test
-    public void test() throws InterruptedException {
-        WifeSays wifeSays = new WifeSays();
-        try {
-            wifeSays.connect();
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        for(int i=0;i<1000;i++) {
-            wifeSays.say("hello");
-            try {
-                System.out.println(wifeSays.hear());
-            } catch (IOException e) {
-
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-            Thread.sleep(1000);
-            if (i>5){
-                wifeSays.say("shutdown");
-            }
-        }
-    }
-
-    @Test
-    public void testDumpCache() {
-        WifeSays wifeSays = new WifeSays();
-        try {
-            wifeSays.connect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        wifeSays.say("add_zones_ip_8.8.8.8:11.11.11.11_gg.liumapp.com");
-        try {
-            System.out.println(wifeSays.hear());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Test
+//    public void test() throws InterruptedException {
+//        WifeSays wifeSays = new WifeSays();
+//        try {
+//            wifeSays.connect();
+//        } catch (IOException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
+//        for(int i=0;i<1000;i++) {
+//            wifeSays.say("hello");
+//            try {
+//                System.out.println(wifeSays.hear());
+//            } catch (IOException e) {
+//
+//                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//            }
+//            Thread.sleep(1000);
+//            if (i>5){
+//                wifeSays.say("shutdown");
+//            }
+//        }
+//    }
+//
+//    @Test
+//    public void testDumpCache() {
+//        WifeSays wifeSays = new WifeSays();
+//        try {
+//            wifeSays.connect();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        wifeSays.say("add_zones_ip_8.8.8.8:11.11.11.11_gg.liumapp.com");
+//        try {
+//            System.out.println(wifeSays.hear());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

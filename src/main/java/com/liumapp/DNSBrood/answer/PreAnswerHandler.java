@@ -1,5 +1,6 @@
-package us.codecraft.blackhole.answer;
+package com.liumapp.DNSBrood.answer;
 
+import com.liumapp.DNSBrood.answer.provider.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,20 +9,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author yihua.huang@dianping.com
- * @date Dec 14, 2012
- * UDP 来访请求的anser注册
+ * Created by liumapp on 7/14/17.
+ * E-mail:liumapp.com@gmail.com
+ * home-page:http://www.liumapp.com
  */
 @Component("preAnswerHandler")
-public class PreAnswerHandler extends AbstractAnswerHandler implements InitializingBean {
+public class PreAnswerHandler extends  AbstractAnswerHandler implements InitializingBean {
 
-	private List<AnswerProvider> answerProviders;
+    private List<AnswerProvider> answerProviders;
 
-	@Autowired
-	private CustomTempAnswerProvider customTempAnswerProvider;
+    @Autowired
+    private CustomTempAnswerProvider customTempAnswerProvider;
 
-	@Autowired
-	private CustomAnswerPatternProvider customAnswerPatternProvider;
+    @Autowired
+    private CustomAnswerPatternProvider customAnswerPatternProvider;
 
     @Autowired
     private AnswerPatternProvider answerPatternProvider;
@@ -35,23 +36,23 @@ public class PreAnswerHandler extends AbstractAnswerHandler implements Initializ
 
     /*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		regitestProviders();
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        regitestProviders();
+    }
 
-	public void regitestProviders() {
-		answerProviders = new LinkedList<AnswerProvider>();
-		answerProviders.add(customTempAnswerProvider);
-		answerProviders.add(customAnswerPatternProvider);
+    public void regitestProviders() {
+        answerProviders = new LinkedList<AnswerProvider>();
+        answerProviders.add(customTempAnswerProvider);
+        answerProviders.add(customAnswerPatternProvider);
         answerProviders.add(tempAnswerContainer);
         answerProviders.add(answerPatternProvider);
         answerProviders.add(safeHostAnswerProvider);
-	}
+    }
 
     @Override
     protected List<AnswerProvider> getaAnswerProviders() {

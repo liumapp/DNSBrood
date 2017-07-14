@@ -1,22 +1,22 @@
-package us.codecraft.blackhole.answer;
+package com.liumapp.DNSBrood.answer;
 
+import com.liumapp.DNSBrood.answer.provider.AnswerProvider;
+import com.liumapp.DNSBrood.container.Handler;
+import com.liumapp.DNSBrood.container.MessageWrapper;
+import com.liumapp.DNSBrood.utils.RecordBuilder;
 import org.apache.log4j.Logger;
 import org.xbill.DNS.DClass;
 import org.xbill.DNS.Record;
 import org.xbill.DNS.Section;
 import org.xbill.DNS.Type;
-import us.codecraft.blackhole.container.Handler;
-import us.codecraft.blackhole.container.MessageWrapper;
-import us.codecraft.blackhole.utils.RecordBuilder;
-
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author yihua.huang@dianping.com <br>
- * @date: 13-7-14 <br>
- * Time: 下午4:36 <br>
+ * Created by liumapp on 7/14/17.
+ * E-mail:liumapp.com@gmail.com
+ * home-page:http://www.liumapp.com
  */
 public abstract class AbstractAnswerHandler implements Handler {
 
@@ -83,5 +83,4 @@ public abstract class AbstractAnswerHandler implements Handler {
         }
         return true;
     }
-
 }

@@ -112,6 +112,7 @@ public class HusbandEar implements TextProcessor, BeanPostProcessor,
 	 * 
 	 * @see org.springframework.beans.factory.config.BeanPostProcessor#
 	 * postProcessAfterInitialization(java.lang.Object, java.lang.String)
+	 * 实例化Bean之后调用
 	 */
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName)
@@ -145,7 +146,7 @@ public class HusbandEar implements TextProcessor, BeanPostProcessor,
 				start();
 			}
 		});
-		thread.setDaemon(true);
+		thread.setDaemon(true);//将其定义为守护线程
 		thread.start();
 	}
 

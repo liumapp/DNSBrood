@@ -13,8 +13,11 @@ public class TCPSocketMonitor extends Thread {
     private Logger log = Logger.getLogger(this.getClass());
 
     private InetAddress addr;
+
     private int port;
+
     private ServerSocket serverSocket;
+
     @Autowired
     private HusbandEar husbandEar;
 

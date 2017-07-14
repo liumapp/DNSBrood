@@ -26,12 +26,20 @@ public class QueryProcesser {
     @Autowired
     private CacheManager cacheManager;
 
+    /**
+     * dig's first entry
+     * @param queryData
+     * @return
+     * @throws IOException
+     */
     public byte[] process(byte[] queryData) throws IOException {
         Message query = new Message(queryData);
         if (logger.isDebugEnabled()) {
             logger.debug("get query "
                     + query.getQuestion().getName().toString());
         }
+        System.out.println("get query " + query.getQuestion().getName().toString());
+
         MessageWrapper responseMessage = new MessageWrapper(new Message(query
                 .getHeader().getID()));
         for (Handler handler : handlerManager.getPreHandlers()) {
