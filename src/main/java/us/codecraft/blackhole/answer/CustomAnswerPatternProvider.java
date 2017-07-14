@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 @Component
 public class CustomAnswerPatternProvider implements AnswerProvider {
 
-
     //TODO:domainPatternsContainer
     private volatile DoubleKeyMap<String, Pattern, String> domainPatterns = new DoubleKeyMap<String, Pattern, String>(new ConcurrentHashMap<String, Map<Pattern, String>>(), LinkedHashMap.class);
 
@@ -138,4 +137,5 @@ public class CustomAnswerPatternProvider implements AnswerProvider {
     public void setDomainTexts(DoubleKeyMap<String, String, String> domainTexts) {
         this.domainTexts = domainTexts;
     }
+
 }

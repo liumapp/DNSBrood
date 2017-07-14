@@ -19,7 +19,7 @@ public class ReloadMonitor implements StandReady {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * us.codecraft.wifesays.me.StandReady#whatYouShouldDo(java.lang.String)
 	 */
@@ -43,7 +43,6 @@ public class ReloadMonitor implements StandReady {
 			return "success";
 		}
 		return null;
-
 	}
 
 	/*
