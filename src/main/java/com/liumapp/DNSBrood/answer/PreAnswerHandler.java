@@ -33,7 +33,6 @@ public class PreAnswerHandler extends  AbstractAnswerHandler implements Initiali
     @Autowired
     private SafeHostAnswerProvider safeHostAnswerProvider;
 
-
     /*
 	 * (non-Javadoc)
 	 *
