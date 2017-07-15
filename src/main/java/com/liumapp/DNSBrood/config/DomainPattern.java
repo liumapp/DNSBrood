@@ -1,13 +1,12 @@
-package us.codecraft.blackhole.config;
+package com.liumapp.DNSBrood.config;
 
 import java.util.regex.Pattern;
 
 /**
- * Compile a pattern to regex or plain text.
- *
- * @author yihua.huang@dianping.com <br>
- * @date: 13-7-15 <br>
- * Time: 上午7:27 <br>
+ * Created by liumapp on 7/15/17.
+ * E-mail:liumapp.com@gmail.com
+ * home-page:http://www.liumapp.com
+ * 域名格式
  */
 public class DomainPattern {
 

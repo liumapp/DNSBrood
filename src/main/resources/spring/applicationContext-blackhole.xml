@@ -11,7 +11,7 @@
         <context:component-scan base-package="us.codecraft" />
         
         <beans>
-        	<bean name="udpSocketMonitor" class="us.codecraft.blackhole.connector.UDPSocketMonitor">
+        	<bean name="udpSocketMonitor" class="com.liumapp.DNSBrood.connector.UDPSocketMonitor">
         		<constructor-arg name="host" type="java.lang.String" value="0.0.0.0"></constructor-arg>
         		<constructor-arg name="port" type="int" value="53"></constructor-arg>
         	</bean>

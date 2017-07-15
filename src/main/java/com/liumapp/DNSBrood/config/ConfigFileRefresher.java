@@ -1,4 +1,4 @@
-package us.codecraft.blackhole.config;
+package com.liumapp.DNSBrood.config;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author yihua.huang@dianping.com
- * @date Dec 29, 2012
- * 当修改过zone file之后，将新的内容同步到程序中。
+ * Created by liumapp on 7/15/17.
+ * E-mail:liumapp.com@gmail.com
+ * home-page:http://www.liumapp.com
+ * 当修改过dnsbrood.conf之后，将新的内容同步到程序中。
  */
 @Component
 public class ConfigFileRefresher implements InitializingBean {
