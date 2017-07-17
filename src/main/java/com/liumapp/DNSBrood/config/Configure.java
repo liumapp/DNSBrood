@@ -17,7 +17,7 @@ public class Configure {
 
     public final static int DEFAULT_DNS_TIMEOUT = 2000;
 
-    public static String FILE_PATH = "/usr/local/dnsbrood/";
+    public static String FILE_PATH = "/usr/local/DNSBrood/";
 
     public final static int DEFAULT_MX_PRIORY = 10;
 
@@ -45,7 +45,7 @@ public class Configure {
 
     public static String getConfigFilename() {
         if (configFilename == null) {
-            return Configure.FILE_PATH + "/config/dnsbrood.conf";
+            return Configure.FILE_PATH + "/config/DNSBrood.conf";
         } else {
             return configFilename;
         }

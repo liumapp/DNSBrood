@@ -1,17 +1,12 @@
 #!/bin/sh
-mkdir -p /usr/local/blackhole/
-mkdir -p /usr/local/blackhole/lib
-if [ ! -d /usr/local/blackhole/config ]
+mkdir -p /usr/local/DNSBrood/
+mkdir -p /usr/local/DNSBrood/lib
+if [ ! -d /usr/local/DNSBrood/config ]
 then
-mkdir -p /usr/local/blackhole/config
-cp ./config/* /usr/local/blackhole/config/
+mkdir -p /usr/local/DNSBrood/config
+cp ./config/* /usr/local/DNSBrood/config/
 fi
-cp ./blackhole.sh /usr/local/blackhole/
-cp ./target/blackhole*.jar /usr/local/blackhole/blackhole.jar
-rsync -avz --delete ./target/lib/ /usr/local/blackhole/lib/
-
-
-
-
-
+cp ./dnsbrood.sh /usr/local/DNSBrood/
+cp ./target/DNSBrood*.jar /usr/local/DNSBrood/DNSBrood.jar
+rsync -avz --delete ./target/lib/ /usr/local/DNSBrood/lib/
 

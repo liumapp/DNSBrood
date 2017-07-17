@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>us.codecraft</groupId>
-	<artifactId>blackhole</artifactId>
-	<version>1.2.2</version>
-	<name>blackhole</name>
-	<description>A simple DNS authoritative server.It can easily be configured to intercept some kind of request to one address.</description>
+	<groupId>com.liumapp</groupId>
+	<artifactId>DNSBrood</artifactId>
+	<version>1.0.0</version>
+	<name>DNSBrood</name>
+	<description>A DNS Server based on DNSJava.</description>
 	<properties>
 		<spring-version>3.1.1.RELEASE</spring-version>
 	</properties>
@@ -109,7 +109,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>./lib/</classpathPrefix>
-							<mainClass>us.codecraft.blackhole.BlackHole</mainClass>
+							<mainClass>com.liumapp.DNSBrood.DNSBrood</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
