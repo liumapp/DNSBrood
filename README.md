@@ -1,6 +1,10 @@
 # DNSBrood
 A DNS server based on dnsjava  , under developing ... plz dont't use right now.
 
+### how to use
+
+* create database 'brood' in mysql with utf-8 charset , and then create table from /sqlchema/mysql.sql 
+
 ### Attention
 
 * only support Linux/Unix System
@@ -10,3 +14,4 @@ A DNS server based on dnsjava  , under developing ... plz dont't use right now.
 ### Debug
 
 Fow How to Debug System , plz view [DNSBrood解析DNS过程中进行Debug](http://www.liumapp.com/articles/2017/07/12/1499822853171.html).
+
