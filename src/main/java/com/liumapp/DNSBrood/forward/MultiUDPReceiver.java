@@ -24,9 +24,6 @@ import java.util.concurrent.*;
 @Component
 public class MultiUDPReceiver implements InitializingBean {
 
-    /**
-     *
-     */
     private static final int dnsPackageLength = 512;
 
     private Map<String, ForwardAnswer> answers = new ConcurrentHashMap<String, ForwardAnswer>();

@@ -42,12 +42,20 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     //add_zones_ip_192.168.0.1:127.0.0.1 *.dianping.com
     private static final String ADD_ZONES_IP = "add_zones_ip_";
 
+    public static String getDeleteZonesIp() {
+        return DELETE_ZONES_IP;
+    }
+
+    public static String getAddZonesIp() {
+        return ADD_ZONES_IP;
+    }
+
     /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-     */
+         * (non-Javadoc)
+         *
+         * @see
+         * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+         */
     public void afterPropertiesSet() throws Exception {
         File zonesFile = new File(Configure.getZonesFilename());
         lastFileModifiedTime = zonesFile.lastModified();
