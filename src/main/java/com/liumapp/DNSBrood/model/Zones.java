@@ -15,9 +15,9 @@ public class Zones {
 
     private String type;
 
-    private int createTime;
+    private long createTime;
 
-    private int updateTime;
+    private long updateTime;
 
     public int getId() {
         return id;
@@ -35,11 +35,11 @@ public class Zones {
         return type;
     }
 
-    public int getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public int getUpdateTime() {
+    public long getUpdateTime() {
         return updateTime;
     }
 
@@ -59,11 +59,11 @@ public class Zones {
         this.type = type;
     }
 
-    public void setCreateTime(int createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
-    public void setUpdateTime(int updateTime) {
+    public void setUpdateTime(long updateTime) {
         this.updateTime = updateTime;
     }
 
