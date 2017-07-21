@@ -25,5 +25,4 @@ public interface ZonesDAO {
     @Delete("delete from zones where id=#{id}")
     public int delete(Zones zone);
 
-
 }

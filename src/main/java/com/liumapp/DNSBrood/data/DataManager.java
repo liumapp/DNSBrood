@@ -6,21 +6,22 @@ import com.liumapp.DNSBrood.model.Zones;
 import com.liumapp.DNSBrood.service.ZonesService;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
 import java.util.regex.Pattern;
 
 /**
- * Created by liumapp on 7/19/17.
+ * Created by liumapp on 7/20/17.
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class DataSaveManager extends StandReadyWorker {
+@Component
+public class DataManager extends StandReadyWorker implements InitializingBean {
 
     @Autowired
     private ZonesService zonesService;
@@ -71,6 +72,8 @@ public class DataSaveManager extends StandReadyWorker {
 
     }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
 
-
+    }
 }

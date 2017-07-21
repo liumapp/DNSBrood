@@ -22,4 +22,5 @@ public class ZonesServiceImpl implements ZonesService {
     public int addZones(Zones zone) {
         return zonesDAO.insert(zone);
     }
+
 }
