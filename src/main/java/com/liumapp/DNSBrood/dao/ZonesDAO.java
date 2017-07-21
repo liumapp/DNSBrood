@@ -2,6 +2,7 @@ package com.liumapp.DNSBrood.dao;
 
 import com.liumapp.DNSBrood.model.Zones;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by liumapp on 7/19/17.
