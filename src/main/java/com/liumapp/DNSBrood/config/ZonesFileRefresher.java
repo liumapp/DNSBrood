@@ -1,6 +1,8 @@
 package com.liumapp.DNSBrood.config;
 
 import com.liumapp.DNSBrood.answer.provider.CustomAnswerPatternProvider;
+import com.liumapp.DNSBrood.model.Zones;
+import com.liumapp.DNSBrood.service.ZonesService;
 import com.liumapp.DNSBrood.utils.RecordUtils;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
 import org.apache.commons.lang3.StringUtils;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.net.UnknownHostException;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +35,9 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
 
     @Autowired
     private CustomAnswerPatternProvider customAnswerPatternProvider;
+
+    @Autowired
+    private ZonesService zonesService;
 
     private ScheduledExecutorService scheduledExecutorService = Executors
             .newScheduledThreadPool(1);
@@ -89,9 +96,9 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     }
 
     @Override
-    public String doWhatYouShouldDo(String whatWifeSays) {
-        if (StringUtils.startsWithIgnoreCase(whatWifeSays, ADD_ZONES_IP)) {
-            String line = StringUtils.removeStart(whatWifeSays, ADD_ZONES_IP);
+    public String doWhatYouShouldDo(String whatQueenSays) {
+        if (StringUtils.startsWithIgnoreCase(whatQueenSays, ADD_ZONES_IP)) {
+            String line = StringUtils.removeStart(whatQueenSays, ADD_ZONES_IP);
             try {
 
                 ZonesPattern zonesPattern = ZonesPattern.parse(line);
@@ -99,6 +106,16 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
                 if (zonesPattern == null) {
                     return "PARSE ERROR";
                 }
+
+                List<Pattern> patterns = zonesPattern.getPatterns();
+
+                Zones zone = new Zones();
+                zone.setType("A");
+                zone.setDomain(zonesPattern.getTexts().toString());
+                zone.setValue(zonesPattern.getTargetIp());
+                zone.setCreateTime(new Date().getTime());
+                zone.setUpdateTime(new Date().getTime());
+                zonesService.addZones(zone);
 
                 for (Pattern pattern : zonesPattern.getPatterns()) {
                     customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
@@ -113,8 +130,8 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
             } catch (UnknownHostException e) {
                 return "ERROR " + e;
             }
-        } else if (StringUtils.startsWithIgnoreCase(whatWifeSays, DELETE_ZONES_IP)) {
-            String ip = StringUtils.removeStart(whatWifeSays, DELETE_ZONES_IP);
+        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays, DELETE_ZONES_IP)) {
+            String ip = StringUtils.removeStart(whatQueenSays, DELETE_ZONES_IP);
             if (RecordUtils.isValidIpv4Address(ip)) {
                 customAnswerPatternProvider.getDomainPatterns().remove(ip);
                 customAnswerPatternProvider.getDomainTexts().remove(ip);

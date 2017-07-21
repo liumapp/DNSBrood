@@ -3,8 +3,8 @@ CREATE TABLE `brood`.`zones` (
   `domain` VARCHAR(125) NULL,
   `value` VARCHAR(255) NULL,
   `type` VARCHAR(45) NULL,
-  `createTime` INT UNSIGNED NULL,
-  `updateTime` INT UNSIGNED NULL,
+  `createTime` BIGINT(20) UNSIGNED NULL,
+  `updateTime` BIGINT(20) UNSIGNED NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `domain_UNIQUE` (`domain` ASC));

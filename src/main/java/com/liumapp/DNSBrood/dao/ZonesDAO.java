@@ -14,7 +14,7 @@ public interface ZonesDAO {
     @Select("select * from zones where domain=#{domain}")
     public Zones getByDomain(@Param("domain") String domain);
 
-    @Insert("insert into zones (`domain` , `value` , `type` , `createTime` , `updateTime`) values" +
+    @Insert("insert into zones (`domain` , `value` , `type` , `createTime` , `updateTime`) values " +
             " (#{domain} , #{value} , #{type} , #{createTime} , #{updateTime})")
     public int insert(Zones zone);
 

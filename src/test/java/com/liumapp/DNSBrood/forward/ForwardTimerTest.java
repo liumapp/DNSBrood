@@ -16,4 +16,5 @@ public class ForwardTimerTest {
         System.out.println(forwardTimer
                 .checkConnectTimeForAddress("173.194.72.106"));
     }
+
 }
