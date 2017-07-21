@@ -37,10 +37,22 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
 
     private long lastFileModifiedTime;
 
-    //delete_zones_ip_192.168.0.1
+    //delete_zones_ip_127.0.0.1
     private static final String DELETE_ZONES_IP = "delete_zones_ip_";
-    //add_zones_ip_192.168.0.1:127.0.0.1 *.dianping.com
+
+    //add_zones_ip_127.0.0.1:4.5.6.7 gmail.liumapp.com
     private static final String ADD_ZONES_IP = "add_zones_ip_";
+
+    //update_zones_ip_127.0.0.1:4.5.6.8 gmail.liumapp.com
+    private static final String UPDATE_ZONES_IP = "update_zones_ip_";
+
+    /**
+     * 正向解析：select_zones_ip_127.0.0.1 gmail.liumapp.com
+     * return : 4.5.6.7
+     * 反向解析：select_zones_ip_127.0.0.1 4.5.6.7
+     * return gmail.liumapp.com
+     */
+    private static final String SELECT_ZONES_IP = "select_zones_ip_";
 
     public static String getDeleteZonesIp() {
         return DELETE_ZONES_IP;
@@ -81,18 +93,23 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
         if (StringUtils.startsWithIgnoreCase(whatWifeSays, ADD_ZONES_IP)) {
             String line = StringUtils.removeStart(whatWifeSays, ADD_ZONES_IP);
             try {
+
                 ZonesPattern zonesPattern = ZonesPattern.parse(line);
 
                 if (zonesPattern == null) {
                     return "PARSE ERROR";
                 }
+
                 for (Pattern pattern : zonesPattern.getPatterns()) {
                     customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
                 }
+
                 for (String text : zonesPattern.getTexts()) {
                     customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
                 }
+
                 return "SUCCESS, " + zonesPattern.getPatterns().size() + " patterns added.";
+
             } catch (UnknownHostException e) {
                 return "ERROR " + e;
             }
