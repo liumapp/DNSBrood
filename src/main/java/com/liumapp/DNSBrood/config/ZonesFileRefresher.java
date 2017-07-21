@@ -51,11 +51,11 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     }
 
     /*
-         * (non-Javadoc)
-         *
-         * @see
-         * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
-         */
+     * (non-Javadoc)
+     *
+     * @see
+     * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
+     */
     public void afterPropertiesSet() throws Exception {
         File zonesFile = new File(Configure.getZonesFilename());
         lastFileModifiedTime = zonesFile.lastModified();
