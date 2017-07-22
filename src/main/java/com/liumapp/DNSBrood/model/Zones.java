@@ -67,6 +67,21 @@ public class Zones {
         this.updateTime = updateTime;
     }
 
+    public Zones() {
+
+
+    }
+
+    public Zones(String domain, String value, String type, long createTime, long updateTime) {
+
+        this.domain = domain;
+        this.value = value;
+        this.type = type;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+
+    }
+
     @Override
     public String toString() {
         return "Zones{" +

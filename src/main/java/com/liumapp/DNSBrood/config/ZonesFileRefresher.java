@@ -98,7 +98,9 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     @Override
     public String doWhatYouShouldDo(String whatQueenSays) {
         if (StringUtils.startsWithIgnoreCase(whatQueenSays, ADD_ZONES_IP)) {
+
             String line = StringUtils.removeStart(whatQueenSays, ADD_ZONES_IP);
+
             try {
 
                 ZonesPattern zonesPattern = ZonesPattern.parse(line);
@@ -107,15 +109,11 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
                     return "PARSE ERROR";
                 }
 
-                List<Pattern> patterns = zonesPattern.getPatterns();
+                Zones zone = new Zones(zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
 
-                Zones zone = new Zones();
-                zone.setType("A");
-                zone.setDomain(zonesPattern.getTexts().toString());
-                zone.setValue(zonesPattern.getTargetIp());
-                zone.setCreateTime(new Date().getTime());
-                zone.setUpdateTime(new Date().getTime());
-                zonesService.addZones(zone);
+                if (!zonesService.isExist(zone)) {
+                    zonesService.addZones(zone);
+                }
 
                 for (Pattern pattern : zonesPattern.getPatterns()) {
                     customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
@@ -128,7 +126,9 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
                 return "SUCCESS, " + zonesPattern.getPatterns().size() + " patterns added.";
 
             } catch (UnknownHostException e) {
+
                 return "ERROR " + e;
+
             }
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays, DELETE_ZONES_IP)) {
             String ip = StringUtils.removeStart(whatQueenSays, DELETE_ZONES_IP);
@@ -139,6 +139,10 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
             } else {
                 return "ERROR, invalid ip " + ip;
             }
+        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , UPDATE_ZONES_IP)) {
+
+        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , SELECT_ZONES_IP)) {
+
         }
 
         return null;

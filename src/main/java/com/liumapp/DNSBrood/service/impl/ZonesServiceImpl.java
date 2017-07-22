@@ -18,9 +18,28 @@ public class ZonesServiceImpl implements ZonesService {
     @Resource
     private ZonesDAO zonesDAO;
 
+    /**
+     * add a new zone
+     * @param zone
+     * @return
+     */
     @Override
     public int addZones(Zones zone) {
+
         return zonesDAO.insert(zone);
+
+    }
+
+    /**
+     * is a zone exist , judging from domain
+     * @param zone
+     * @return
+     */
+    @Override
+    public boolean isExist(Zones zone) {
+
+        return zonesDAO.getByDomain(zone.getDomain()) != null;
+
     }
 
 }

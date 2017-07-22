@@ -11,4 +11,6 @@ public interface ZonesService {
 
     public int addZones(Zones zone);
 
+    public boolean isExist(Zones zone);
+
 }

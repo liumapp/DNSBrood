@@ -18,7 +18,6 @@ public interface ZonesDAO {
             " (#{domain} , #{value} , #{type} , #{createTime} , #{updateTime})")
     public int insert(Zones zone);
 
-
     @Update("update zones set `domain`=#{domain} , `value`=#{value} ," +
             " `type`=#{type} , `createTime`=#{createTime} , `updateTime`=#{updateTime}")
     public int update(Zones zone);
