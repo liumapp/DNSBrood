@@ -2,6 +2,8 @@ package com.liumapp.DNSBrood.config;
 
 import com.liumapp.DNSBrood.answer.provider.CustomAnswerPatternProvider;
 import com.liumapp.DNSBrood.model.Zones;
+import com.liumapp.DNSBrood.record.DelZoneManager;
+import com.liumapp.DNSBrood.record.Manager;
 import com.liumapp.DNSBrood.service.ZonesService;
 import com.liumapp.DNSBrood.utils.RecordUtils;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -39,35 +42,16 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     @Autowired
     private ZonesService zonesService;
 
+    @Resource(name = "AddZoneManager")
+    private Manager addZoneManager;
+
+    @Resource(name = "DelZoneManager")
+    private Manager delZoneManager;
+
     private ScheduledExecutorService scheduledExecutorService = Executors
             .newScheduledThreadPool(1);
 
     private long lastFileModifiedTime;
-
-    //delete_zones_ip_127.0.0.1
-    private static final String DELETE_ZONES_IP = "delete_zones_ip_";
-
-    //add_zones_ip_127.0.0.1:4.5.6.7 gmail.liumapp.com
-    private static final String ADD_ZONES_IP = "add_zones_ip_";
-
-    //update_zones_ip_127.0.0.1:4.5.6.8 gmail.liumapp.com
-    private static final String UPDATE_ZONES_IP = "update_zones_ip_";
-
-    /**
-     * 正向解析：select_zones_ip_127.0.0.1 gmail.liumapp.com
-     * return : 4.5.6.7
-     * 反向解析：select_zones_ip_127.0.0.1 4.5.6.7
-     * return gmail.liumapp.com
-     */
-    private static final String SELECT_ZONES_IP = "select_zones_ip_";
-
-    public static String getDeleteZonesIp() {
-        return DELETE_ZONES_IP;
-    }
-
-    public static String getAddZonesIp() {
-        return ADD_ZONES_IP;
-    }
 
     /*
      * (non-Javadoc)
@@ -76,6 +60,7 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
      * org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
      */
     public void afterPropertiesSet() throws Exception {
+
         File zonesFile = new File(Configure.getZonesFilename());
         lastFileModifiedTime = zonesFile.lastModified();
 
@@ -92,73 +77,30 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
                     }
                 }
             }
+
         }, 500, 500, TimeUnit.MILLISECONDS);
+
     }
 
     @Override
     public String doWhatYouShouldDo(String whatQueenSays) {
-        if (StringUtils.startsWithIgnoreCase(whatQueenSays, ADD_ZONES_IP)) {
 
-            /**
-             * add zone record
-             */
-            String line = StringUtils.removeStart(whatQueenSays, ADD_ZONES_IP);
+        if (StringUtils.startsWithIgnoreCase(whatQueenSays, configure.getAddZonesIp())) {
 
-            try {
+            return addZoneManager.handle(whatQueenSays);
 
-                ZonesPattern zonesPattern = ZonesPattern.parse(line);
+        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays, configure.getDeleteZonesIp())) {
 
-                if (zonesPattern == null) {
-                    return "PARSE ERROR";
-                }
+            return delZoneManager.handle(whatQueenSays);
 
-                Zones zone = new Zones(zonesPattern.getUserIp(),zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
+        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , configure.getUpdateZonesIp())) {
 
-                /**
-                 * save to db
-                 */
-                if (!zonesService.isExist(zone)) {
-                    zonesService.addZones(zone);
-                }
-
-                /**
-                 * put to dnsjava
-                 */
-                for (Pattern pattern : zonesPattern.getPatterns()) {
-                    customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
-                }
-
-                for (String text : zonesPattern.getTexts()) {
-                    customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
-                }
-
-                return "SUCCESS, " + zonesPattern.getPatterns().size() + " patterns added.";
-
-            } catch (UnknownHostException e) {
-
-                return "ERROR " + e;
-
-            }
-
-        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays, DELETE_ZONES_IP)) {
-
-            String ip = StringUtils.removeStart(whatQueenSays, DELETE_ZONES_IP);
-
-            if (RecordUtils.isValidIpv4Address(ip)) {
-                customAnswerPatternProvider.getDomainPatterns().remove(ip);
-                customAnswerPatternProvider.getDomainTexts().remove(ip);
-                return "REMOVE SUCCESS";
-            } else {
-                return "ERROR, invalid ip " + ip;
-            }
-
-        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , UPDATE_ZONES_IP)) {
-
-        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , SELECT_ZONES_IP)) {
+        } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , configure.getSelectZonesIp())) {
 
         }
 
         return null;
     }
+
 
 }
