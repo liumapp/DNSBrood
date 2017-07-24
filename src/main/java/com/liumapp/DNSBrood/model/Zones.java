@@ -9,7 +9,7 @@ public class Zones {
 
     private int id;
 
-    private String serverIp;
+    private String userNumber;
 
     private String domain;
 
@@ -21,8 +21,8 @@ public class Zones {
 
     private long updateTime;
 
-    public String getServerIp() {
-        return serverIp;
+    public String getUserNumber() {
+        return userNumber;
     }
 
     public int getId() {
@@ -53,8 +53,8 @@ public class Zones {
         this.id = id;
     }
 
-    public void setServerIp(String serverIp) {
-        this.serverIp = serverIp;
+    public void setUserNumber(String serverIp) {
+        this.userNumber = serverIp;
     }
 
     public void setDomain(String domain) {
@@ -92,8 +92,8 @@ public class Zones {
 
     }
 
-    public Zones(String serverIp, String domain, String value, String type, long createTime, long updateTime) {
-        this.serverIp = serverIp;
+    public Zones(String userNumber, String domain, String value, String type, long createTime, long updateTime) {
+        this.userNumber = userNumber;
         this.domain = domain;
         this.value = value;
         this.type = type;
@@ -105,7 +105,7 @@ public class Zones {
     public String toString() {
         return "Zones{" +
                 "id=" + id +
-                ", serverIp='" + serverIp + '\'' +
+                ", userNumber='" + userNumber + '\'' +
                 ", domain='" + domain + '\'' +
                 ", value='" + value + '\'' +
                 ", type='" + type + '\'' +

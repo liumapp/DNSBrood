@@ -21,9 +21,19 @@ public class ZonesPattern {
 
     private String targetIp;
 
+    private String userNumber;
+
     private List<Pattern> patterns = new ArrayList<Pattern>();
 
     private List<String> texts = new ArrayList<String>();
+
+    public String getUserNumber() {
+        return userNumber;
+    }
+
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
+    }
 
     public List<Pattern> getPatterns() {
         return patterns;
