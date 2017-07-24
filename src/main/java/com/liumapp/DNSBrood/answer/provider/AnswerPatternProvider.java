@@ -34,11 +34,12 @@ public class AnswerPatternProvider implements AnswerProvider {
      * (non-Javadoc)
      *
      * @see
-     * us.codecraft.blackhole.answer.AnswerProvider#getAnswer(java.lang.String,
+     * com.liumapp.DNSBrood.answer.provider.AnswerProvider
      * int)
      */
     @Override
     public String getAnswer(String query, int type) {
+
         if (type == Type.PTR) {
             return null;
         }
@@ -62,6 +63,7 @@ public class AnswerPatternProvider implements AnswerProvider {
             logger.info("not a ip, ignored");
         }
         return ip;
+
     }
 
     /**
@@ -79,10 +81,13 @@ public class AnswerPatternProvider implements AnswerProvider {
      * @return
      */
     private String fakeCNAMEHost(String domain) {
+
         return FAKE_CANME_PREFIX + domain;
+
     }
 
     private String reverseIp(String ip) {
+
         int[] array = Address.toArray(ip);
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = array.length - 1; i >= 0; i--) {
@@ -90,6 +95,7 @@ public class AnswerPatternProvider implements AnswerProvider {
         }
         stringBuilder.append("in-addr.arpa.");
         return stringBuilder.toString();
+
     }
 
     public void setDomainPatternsContainer(DomainPatternsContainer domainPatternsContainer) {
