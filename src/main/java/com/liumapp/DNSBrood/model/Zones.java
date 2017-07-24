@@ -9,6 +9,8 @@ public class Zones {
 
     private int id;
 
+    private String serverIp;
+
     private String domain;
 
     private String value;
@@ -18,6 +20,10 @@ public class Zones {
     private long createTime;
 
     private long updateTime;
+
+    public String getServerIp() {
+        return serverIp;
+    }
 
     public int getId() {
         return id;
@@ -45,6 +51,10 @@ public class Zones {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setServerIp(String serverIp) {
+        this.serverIp = serverIp;
     }
 
     public void setDomain(String domain) {
@@ -82,10 +92,20 @@ public class Zones {
 
     }
 
+    public Zones(String serverIp, String domain, String value, String type, long createTime, long updateTime) {
+        this.serverIp = serverIp;
+        this.domain = domain;
+        this.value = value;
+        this.type = type;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         return "Zones{" +
                 "id=" + id +
+                ", serverIp='" + serverIp + '\'' +
                 ", domain='" + domain + '\'' +
                 ", value='" + value + '\'' +
                 ", type='" + type + '\'' +

@@ -99,6 +99,9 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     public String doWhatYouShouldDo(String whatQueenSays) {
         if (StringUtils.startsWithIgnoreCase(whatQueenSays, ADD_ZONES_IP)) {
 
+            /**
+             * add zone record
+             */
             String line = StringUtils.removeStart(whatQueenSays, ADD_ZONES_IP);
 
             try {
@@ -109,12 +112,18 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
                     return "PARSE ERROR";
                 }
 
-                Zones zone = new Zones(zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
+                Zones zone = new Zones(zonesPattern.getUserIp(),zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
 
+                /**
+                 * save to db
+                 */
                 if (!zonesService.isExist(zone)) {
                     zonesService.addZones(zone);
                 }
 
+                /**
+                 * put to dnsjava
+                 */
                 for (Pattern pattern : zonesPattern.getPatterns()) {
                     customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
                 }
@@ -130,8 +139,11 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
                 return "ERROR " + e;
 
             }
+
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays, DELETE_ZONES_IP)) {
+
             String ip = StringUtils.removeStart(whatQueenSays, DELETE_ZONES_IP);
+
             if (RecordUtils.isValidIpv4Address(ip)) {
                 customAnswerPatternProvider.getDomainPatterns().remove(ip);
                 customAnswerPatternProvider.getDomainTexts().remove(ip);
@@ -139,6 +151,7 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
             } else {
                 return "ERROR, invalid ip " + ip;
             }
+
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , UPDATE_ZONES_IP)) {
 
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , SELECT_ZONES_IP)) {
