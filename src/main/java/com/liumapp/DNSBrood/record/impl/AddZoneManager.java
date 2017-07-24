@@ -1,9 +1,10 @@
-package com.liumapp.DNSBrood.record;
+package com.liumapp.DNSBrood.record.impl;
 
 import com.liumapp.DNSBrood.answer.provider.CustomAnswerPatternProvider;
 import com.liumapp.DNSBrood.config.Configure;
 import com.liumapp.DNSBrood.config.ZonesPattern;
 import com.liumapp.DNSBrood.model.Zones;
+import com.liumapp.DNSBrood.record.Manager;
 import com.liumapp.DNSBrood.service.ZonesService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,8 @@
 package com.liumapp.DNSBrood.config;
 
 import com.liumapp.DNSBrood.answer.provider.CustomAnswerPatternProvider;
-import com.liumapp.DNSBrood.model.Zones;
-import com.liumapp.DNSBrood.record.DelZoneManager;
 import com.liumapp.DNSBrood.record.Manager;
 import com.liumapp.DNSBrood.service.ZonesService;
-import com.liumapp.DNSBrood.utils.RecordUtils;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
@@ -14,13 +11,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 /**
  * Created by liumapp on 7/15/17.
@@ -36,17 +29,17 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     @Autowired
     private ZonesFileLoader zonesFileLoader;
 
-    @Autowired
-    private CustomAnswerPatternProvider customAnswerPatternProvider;
-
-    @Autowired
-    private ZonesService zonesService;
-
     @Resource(name = "AddZoneManager")
     private Manager addZoneManager;
 
     @Resource(name = "DelZoneManager")
     private Manager delZoneManager;
+
+    @Resource(name = "UpdateZoneManager")
+    private Manager updateZoneManager;
+
+    @Resource(name = "SelectZoneManager")
+    private Manager selectZoneManager;
 
     private ScheduledExecutorService scheduledExecutorService = Executors
             .newScheduledThreadPool(1);
@@ -95,7 +88,11 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
 
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , configure.getUpdateZonesIp())) {
 
+            return updateZoneManager.handle(whatQueenSays);
+
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , configure.getSelectZonesIp())) {
+
+            return selectZoneManager.handle(whatQueenSays);
 
         }
 

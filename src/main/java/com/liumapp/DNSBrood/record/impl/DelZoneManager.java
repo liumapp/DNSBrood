@@ -1,5 +1,6 @@
-package com.liumapp.DNSBrood.record;
+package com.liumapp.DNSBrood.record.impl;
 
+import com.liumapp.DNSBrood.record.Manager;
 import org.springframework.stereotype.Service;
 
 /**
