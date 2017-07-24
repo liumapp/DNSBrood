@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-@Service
+@Service("DelZoneManager")
 public class DelZoneManager implements Manager {
 
     @Override

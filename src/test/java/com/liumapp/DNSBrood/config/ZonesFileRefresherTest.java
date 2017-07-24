@@ -13,18 +13,18 @@ import java.io.IOException;
 public class ZonesFileRefresherTest extends TestCase {
 
     public void testSaveOneZone() {
-        Queen queen = new Queen();
-        try {
-            queen.connect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        queen.say("add_zones_ip_127.0.0.1:6.7.4.5_gmail.liumapp.com");
-        try {
-            System.out.println(queen.hear());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Queen queen = new Queen();
+//        try {
+//            queen.connect();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        queen.say("add_zones_ip_127.0.0.1:6.7.4.5_gmail.liumapp.com");
+//        try {
+//            System.out.println(queen.hear());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 }

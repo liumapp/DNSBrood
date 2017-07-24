@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-@Service
+@Service("AddZoneManager")
 public class AddZoneManager implements Manager {
 
     @Autowired
