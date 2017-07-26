@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class ZonesPattern {
 
-    private String userIp;
+    private String userIp = "127.0.0.1";
 
     private String targetIp;
 
@@ -67,6 +67,12 @@ public class ZonesPattern {
         this.texts = texts;
     }
 
+    /**
+     * 取消serverIp，改为使用userNumber
+     * @param line
+     * @return
+     * @throws UnknownHostException
+     */
     public static ZonesPattern parse(String line) throws UnknownHostException {
         ZonesPattern zonesPattern = new ZonesPattern();
         line = line.trim();
@@ -74,16 +80,17 @@ public class ZonesPattern {
             return null;
         }
         if (line.contains(":")) {
-            String userIp = StringUtils.trim(StringUtils.substringBefore(line, ":"));
-            zonesPattern.setUserIp(userIp);
+            String userNumber = StringUtils.trim(StringUtils.substringBefore(line , ":"));
+            zonesPattern.setUserNumber(userNumber);
             line = StringUtils.trim(StringUtils.substringAfter(line, ":"));
-            Address.getByAddress(userIp);
+            Address.getByAddress(zonesPattern.userIp);
         }
         String[] items = line.split("[\\s_]+");
         if (items.length < 2) {
             return null;
         }
         if (items[0].equalsIgnoreCase("NS")) {
+
             boolean configIp = RecordUtils
                     .areValidIpv4Addresses(items[1]);
             zonesPattern.setTargetIp(AnswerPatternProvider.DO_NOTHING);

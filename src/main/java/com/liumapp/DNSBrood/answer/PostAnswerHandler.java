@@ -36,4 +36,5 @@ public class PostAnswerHandler extends AbstractAnswerHandler implements Initiali
     protected List<AnswerProvider> getaAnswerProviders() {
         return answerProviders;
     }
+
 }
