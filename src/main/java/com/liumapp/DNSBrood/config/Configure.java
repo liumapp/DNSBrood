@@ -45,7 +45,7 @@ public class Configure {
 
     public static String getConfigFilename() {
         if (configFilename == null) {
-            return Configure.FILE_PATH + "/config/DNSBrood.conf";
+            return Configure.FILE_PATH + "config/DNSBrood.conf";
         } else {
             return configFilename;
         }

@@ -47,6 +47,7 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
     private Logger logger = Logger.getLogger(getClass());
 
     public void readConfig(String filename) {
+
         try {
             DomainPatternsContainer domainPatternsContainer = new DomainPatternsContainer();
             DomainPatternsContainer nsDomainPatternContainer = new DomainPatternsContainer();
@@ -109,6 +110,7 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
         } catch (Throwable e) {
             logger.warn("read config file failed:" + filename, e);
         }
+
     }
 
     /*

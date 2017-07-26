@@ -21,7 +21,7 @@ public class ZonesPattern {
 
     private String targetIp;
 
-    private String userNumber;
+    private String userNumber = "LM";
 
     private List<Pattern> patterns = new ArrayList<Pattern>();
 

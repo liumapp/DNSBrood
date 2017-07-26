@@ -36,7 +36,6 @@ public class QueryProcesser {
             logger.debug("get query "
                     + query.getQuestion().getName().toString());
         }
-        System.out.println("get query " + query.getQuestion().getName().toString());
 
         MessageWrapper responseMessage = new MessageWrapper(new Message(query
                 .getHeader().getID()));
