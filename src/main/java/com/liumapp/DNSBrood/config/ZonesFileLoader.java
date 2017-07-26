@@ -5,6 +5,8 @@ import com.liumapp.DNSBrood.answer.provider.AnswerPatternProvider;
 import com.liumapp.DNSBrood.answer.provider.CustomAnswerPatternProvider;
 import com.liumapp.DNSBrood.cache.CacheManager;
 import com.liumapp.DNSBrood.forward.DNSHostsContainer;
+import com.liumapp.DNSBrood.model.Zones;
+import com.liumapp.DNSBrood.service.ZonesService;
 import com.liumapp.DNSBrood.utils.DoubleKeyMap;
 import com.liumapp.DNSQueen.worker.job.ReloadAble;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -44,6 +47,9 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
     @Autowired
     private DNSHostsContainer dnsHostsContainer;
 
+    @Autowired
+    private ZonesService zonesService;
+
     private Logger logger = Logger.getLogger(getClass());
 
     public void readConfig(String filename) {
@@ -63,6 +69,7 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
                     continue;
                 }
                 try {
+
                     if (zonesPattern.getUserIp() == null) {
                         for (Pattern pattern : zonesPattern.getPatterns()) {
                             domainPatternsContainer.getDomainPatterns().put(pattern, zonesPattern.getTargetIp());
@@ -82,6 +89,14 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
                 } catch (Exception e) {
                     logger.warn("parse config line error:\t" + line + "\t" , e);
                 }
+
+                //save to db
+                Zones zone = new Zones(zonesPattern.getUserNumber() , zonesPattern.getUserIp() , zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" ,new Date().getTime() , new Date().getTime());
+
+                if (!zonesService.isExist(zone)) {
+                    zonesService.addZones(zone);
+                }
+
                 // For NS
                 if (line.startsWith("NS")) {
                     line = StringUtils.removeStartIgnoreCase(line, "NS").trim();
