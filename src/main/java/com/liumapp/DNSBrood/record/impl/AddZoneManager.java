@@ -63,11 +63,11 @@ public class AddZoneManager implements Manager {
                  * 已经存在的则执行更新操作
                  * 不过要先检查userNumber是否相等
                  */
-                Zones tmp = zonesService.getZone(zonesPattern.getTexts().toString());
+                Zones tmp = zonesService.getZone(zonesPattern.getTexts().get(0));
                 if (tmp.getUserNumber() == zonesPattern.getUserNumber()) {
                     zonesService.updateZones(zone);
                 } else {
-                    return "ERROR: you have no access to control " + zonesPattern.getTexts().toString();
+                    return "ERROR: you have no access to control " + zonesPattern.getTexts().get(0);
                 }
             }
 
