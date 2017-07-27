@@ -47,7 +47,7 @@ public class AddZoneManager implements Manager {
                 return "PARSE ERROR";
             }
 
-            Zones zone = new Zones(zonesPattern.getUserIp(),zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
+            Zones zone = new Zones(zonesPattern.getUserNumber(),zonesPattern.getUserIp(),zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
 
             /**
              * save to db

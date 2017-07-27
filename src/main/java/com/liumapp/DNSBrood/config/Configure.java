@@ -56,9 +56,8 @@ public class Configure {
     }
 
     /**
-     * del all dns records within specify serverIp : delete_zones_ip_127.0.0.1 (disabled right now)
-     * del all dns records shall be dangerous i think . so it was disabled .
-     * del specify records : delete_zones_ip_127.0.0.1:4.5.6.7 gmail.liumapp.com
+     * del all dns records within specify userNumber : delete_zones_ip_LM0000000
+     * del specify records : delete_zones_ip_LM0000000:4.5.6.7 gmail.liumapp.com
      */
     private static final String DELETE_ZONES_IP = "delete_zones_ip_";
 

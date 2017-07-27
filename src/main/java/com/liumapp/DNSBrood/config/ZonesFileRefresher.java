@@ -33,6 +33,9 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
     @Resource(name = "DelZoneManager")
     private Manager delZoneManager;
 
+    @Resource(name = "MultyDelManager")
+    private Manager multyDelZoneManager;
+
     @Resource(name = "UpdateZoneManager")
     private Manager updateZoneManager;
 
@@ -82,7 +85,11 @@ public class ZonesFileRefresher extends StandReadyWorker implements Initializing
 
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays, configure.getDeleteZonesIp())) {
 
-            return delZoneManager.handle(whatQueenSays);
+            if (whatQueenSays.contains(":")) {
+                return delZoneManager.handle(whatQueenSays);
+            } else {
+                return multyDelZoneManager.handle(whatQueenSays);
+            }
 
         } else if (StringUtils.startsWithIgnoreCase(whatQueenSays , configure.getUpdateZonesIp())) {
 
