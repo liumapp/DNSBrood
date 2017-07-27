@@ -47,7 +47,7 @@ public class CustomAnswerPatternProvider implements AnswerProvider {
      * (non-Javadoc)
      *
      * @see
-     * us.codecraft.blackhole.answer.AnswerProvider#getAnswer(java.lang.String,
+     * com.liumapp.DNSBrood.answer.provider.AnswerProvider#getAnswer(java.lang.String,
      * int)
      */
     @Override

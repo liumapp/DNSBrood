@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
  * Created by liumapp on 7/15/17.
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
+ * 写在 zones file的记录，其userNumber将被标识为LM
  */
 @Component
 public class ZonesFileLoader implements InitializingBean, ReloadAble {
@@ -71,23 +72,30 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
                 try {
 
                     if (zonesPattern.getUserIp() == null) {
-                        for (Pattern pattern : zonesPattern.getPatterns()) {
-                            domainPatternsContainer.getDomainPatterns().put(pattern, zonesPattern.getTargetIp());
-                        }
+//                        for (Pattern pattern : zonesPattern.getPatterns()) {
+//                            domainPatternsContainer.getDomainPatterns().put(pattern, zonesPattern.getTargetIp());
+//                        }
                         for (String text : zonesPattern.getTexts()) {
-                            domainPatternsContainer.getDomainTexts().put(text, zonesPattern.getTargetIp());
+//                            domainPatternsContainer.getDomainTexts().put(text, zonesPattern.getTargetIp());
+                            domainPatternsContainer.getDomainTexts().put(text , zonesPattern.getTargetIp());
+
                         }
                     } else {
-                        for (Pattern pattern : zonesPattern.getPatterns()) {
-                            customAnswerPatternsTemp.put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
-                        }
+//                        for (Pattern pattern : zonesPattern.getPatterns()) {
+//                            customAnswerPatternsTemp.put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
+//                        }
                         for (String text : zonesPattern.getTexts()) {
-                            customAnswerTextsTemp.put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
+                            customAnswerTextsTemp.put(text, "ip", zonesPattern.getTargetIp());
+                            customAnswerTextsTemp.put(text, "userNumber" , "LM");
                         }
                     }
+
                     logger.info("read config success:\t" + line);
+
                 } catch (Exception e) {
+
                     logger.warn("parse config line error:\t" + line + "\t" , e);
+
                 }
 
                 //save to db

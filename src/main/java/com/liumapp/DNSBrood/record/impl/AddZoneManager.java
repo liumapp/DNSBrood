@@ -59,12 +59,15 @@ public class AddZoneManager implements Manager {
             /**
              * put to dnsjava
              */
-            for (Pattern pattern : zonesPattern.getPatterns()) {
-                customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
-            }
+//            for (Pattern pattern : zonesPattern.getPatterns()) {
+//                customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
+//            }
 
             for (String text : zonesPattern.getTexts()) {
-                customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
+//                customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
+
+                customAnswerPatternProvider.getDomainTexts().put(text , "ip" , zonesPattern.getTargetIp());
+                customAnswerPatternProvider.getDomainTexts().put(text ,  "userNumber" , zonesPattern.getUserNumber());
             }
 
             return "SUCCESS, " + zonesPattern.getPatterns().size() + " patterns added.";
