@@ -50,7 +50,7 @@ public class AddZoneManager implements Manager {
                 return "PARSE ERROR";
             }
 
-            Zones zone = new Zones(zonesPattern.getUserNumber(),zonesPattern.getUserIp(),zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
+            Zones zone = new Zones(zonesPattern.getUserNumber(),zonesPattern.getTexts().get(0) , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
 
             /**
              * save to db
@@ -74,12 +74,8 @@ public class AddZoneManager implements Manager {
             /**
              * put to dnsjava
              */
-//            for (Pattern pattern : zonesPattern.getPatterns()) {
-//                customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
-//            }
 
             for (String text : zonesPattern.getTexts()) {
-//                customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
 
                 if (domainTexts.get(text) != null) {
                     /**
@@ -95,8 +91,6 @@ public class AddZoneManager implements Manager {
                     customAnswerPatternProvider.getDomainTexts().put(text , "ip" , zonesPattern.getTargetIp());
                     customAnswerPatternProvider.getDomainTexts().put(text ,  "userNumber" , zonesPattern.getUserNumber());
                 }
-
-
 
             }
 

@@ -17,8 +17,6 @@ import java.util.regex.Pattern;
  */
 public class ZonesPattern {
 
-    private String userIp = "127.0.0.1";
-
     private String targetIp;
 
     private String userNumber = "LM";
@@ -51,14 +49,6 @@ public class ZonesPattern {
         this.targetIp = targetIp;
     }
 
-    public String getUserIp() {
-        return userIp;
-    }
-
-    public void setUserIp(String userIp) {
-        this.userIp = userIp;
-    }
-
     public List<String> getTexts() {
         return texts;
     }
@@ -83,9 +73,10 @@ public class ZonesPattern {
             String userNumber = StringUtils.trim(StringUtils.substringBefore(line , ":"));
             zonesPattern.setUserNumber(userNumber);
             line = StringUtils.trim(StringUtils.substringAfter(line, ":"));
-            Address.getByAddress(zonesPattern.userIp);
         }
+
         String[] items = line.split("[\\s_]+");
+
         if (items.length < 2) {
             return null;
         }
@@ -120,6 +111,7 @@ public class ZonesPattern {
             zonesPattern.getTexts().add(domainPattern.getFullTextMatch());
         }
     }
+
 
 
 }

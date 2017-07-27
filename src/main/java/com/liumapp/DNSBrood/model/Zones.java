@@ -11,8 +11,6 @@ public class Zones {
 
     private String userNumber;
 
-    private String userIp;
-
     private String domain;
 
     private String value;
@@ -22,10 +20,6 @@ public class Zones {
     private long createTime;
 
     private long updateTime;
-
-    public String getUserIp() {
-        return userIp;
-    }
 
     public String getUserNumber() {
         return userNumber;
@@ -59,12 +53,8 @@ public class Zones {
         this.id = id;
     }
 
-    public void setUserIp(String userIp) {
-        this.userIp = userIp;
-    }
-
-    public void setUserNumber(String serverIp) {
-        this.userNumber = serverIp;
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
     }
 
     public void setDomain(String domain) {
@@ -92,15 +82,11 @@ public class Zones {
 
     }
 
-
-    public Zones(String domain, String value, String type, long createTime, long updateTime) {
-
+    public Zones(String userNumber, String domain, String value, String type) {
+        this.userNumber = userNumber;
         this.domain = domain;
         this.value = value;
         this.type = type;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-
     }
 
     public Zones(String userNumber, String domain, String value, String type, long createTime, long updateTime) {
@@ -111,17 +97,6 @@ public class Zones {
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
-
-    public Zones(String userNumber, String userIp, String domain, String value, String type, long createTime, long updateTime) {
-        this.userNumber = userNumber;
-        this.userIp = userIp;
-        this.domain = domain;
-        this.value = value;
-        this.type = type;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
-
 
     @Override
     public String toString() {

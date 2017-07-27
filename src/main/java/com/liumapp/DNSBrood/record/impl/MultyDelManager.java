@@ -6,6 +6,7 @@ import com.liumapp.DNSBrood.config.ZonesPattern;
 import com.liumapp.DNSBrood.model.Zones;
 import com.liumapp.DNSBrood.record.Manager;
 import com.liumapp.DNSBrood.service.ZonesService;
+import com.liumapp.DNSBrood.utils.DoubleKeyMap;
 import com.liumapp.DNSBrood.utils.RecordUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,12 @@ public class MultyDelManager implements Manager {
 
         String line = StringUtils.removeStart(whatQueenSays,configure.getAddZonesIp());
 
+        DoubleKeyMap<String , String , String> domainTexts = customAnswerPatternProvider.getDomainTexts();
 
+        /**
+         * get data info from database
+         */
+        
 
 //        try {
 

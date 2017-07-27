@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  * 写在 zones file的记录，其userNumber将被标识为LM
+ * zones file 一行只允许出现一条解析记录
  */
 @Component
 public class ZonesFileLoader implements InitializingBean, ReloadAble {
@@ -71,23 +72,9 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
                 }
                 try {
 
-                    if (zonesPattern.getUserIp() == null) {
-//                        for (Pattern pattern : zonesPattern.getPatterns()) {
-//                            domainPatternsContainer.getDomainPatterns().put(pattern, zonesPattern.getTargetIp());
-//                        }
-                        for (String text : zonesPattern.getTexts()) {
-//                            domainPatternsContainer.getDomainTexts().put(text, zonesPattern.getTargetIp());
-                            domainPatternsContainer.getDomainTexts().put(text , zonesPattern.getTargetIp());
-
-                        }
-                    } else {
-//                        for (Pattern pattern : zonesPattern.getPatterns()) {
-//                            customAnswerPatternsTemp.put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
-//                        }
-                        for (String text : zonesPattern.getTexts()) {
-                            customAnswerTextsTemp.put(text, "ip", zonesPattern.getTargetIp());
-                            customAnswerTextsTemp.put(text, "userNumber" , "LM");
-                        }
+                    for (String text : zonesPattern.getTexts()) {
+                        customAnswerTextsTemp.put(text, "ip", zonesPattern.getTargetIp());
+                        customAnswerTextsTemp.put(text, "userNumber" , "LM");
                     }
 
                     logger.info("read config success:\t" + line);
@@ -99,7 +86,7 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
                 }
 
                 //save to db
-                Zones zone = new Zones(zonesPattern.getUserNumber() , zonesPattern.getUserIp() , zonesPattern.getTexts().toString() , zonesPattern.getTargetIp() , "A" ,new Date().getTime() , new Date().getTime());
+                Zones zone = new Zones(zonesPattern.getUserNumber() , zonesPattern.getTexts().get(0) , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
 
                 if (!zonesService.isExist(zone)) {
                     zonesService.addZones(zone);

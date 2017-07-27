@@ -14,11 +14,11 @@ public interface ZonesDAO {
     @Select("select * from zones where domain=#{domain}")
     public Zones getByDomain(@Param("domain") String domain);
 
-    @Insert("insert into zones ( `userIp`,`userNumber`,`domain` , `value` , `type` , `createTime` , `updateTime`) values " +
-            " (#{userIp} , #{userNumber} , #{domain} , #{value} , #{type} , #{createTime} , #{updateTime})")
+    @Insert("insert into zones ( `userNumber`,`domain` , `value` , `type` , `createTime` , `updateTime`) values " +
+            " (#{userNumber} , #{domain} , #{value} , #{type} , #{createTime} , #{updateTime})")
     public int insert(Zones zone);
 
-    @Update("update zones set `userIp`=#{userIp} , `userNumber`=#{userNumber} , `domain`=#{domain} , `value`=#{value} ," +
+    @Update("update zones set `userNumber`=#{userNumber} , `domain`=#{domain} , `value`=#{value} ," +
             " `type`=#{type} , `createTime`=#{createTime} , `updateTime`=#{updateTime}")
     public int update(Zones zone);
 
