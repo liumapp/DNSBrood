@@ -6,6 +6,7 @@ import com.liumapp.DNSBrood.config.ZonesPattern;
 import com.liumapp.DNSBrood.model.Zones;
 import com.liumapp.DNSBrood.record.Manager;
 import com.liumapp.DNSBrood.service.ZonesService;
+import com.liumapp.DNSBrood.utils.DoubleKeyMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,8 @@ public class AddZoneManager implements Manager {
          */
         String line = StringUtils.removeStart(whatQueenSays,configure.getAddZonesIp());
 
+        DoubleKeyMap <String , String , String > domainTexts = customAnswerPatternProvider.getDomainTexts();
+
         try {
 
             ZonesPattern zonesPattern = ZonesPattern.parse(line);
@@ -53,7 +56,19 @@ public class AddZoneManager implements Manager {
              * save to db
              */
             if (!zonesService.isExist(zone)) {
+                //不存在则添加到db
                 zonesService.addZones(zone);
+            } else {
+                /**
+                 * 已经存在的则执行更新操作
+                 * 不过要先检查userNumber是否相等
+                 */
+                Zones tmp = zonesService.getZone(zonesPattern.getTexts().toString());
+                if (tmp.getUserNumber() == zonesPattern.getUserNumber()) {
+                    zonesService.updateZones(zone);
+                } else {
+                    return "ERROR: you have no access to control " + zonesPattern.getTexts().toString();
+                }
             }
 
             /**
@@ -66,11 +81,26 @@ public class AddZoneManager implements Manager {
             for (String text : zonesPattern.getTexts()) {
 //                customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
 
-                customAnswerPatternProvider.getDomainTexts().put(text , "ip" , zonesPattern.getTargetIp());
-                customAnswerPatternProvider.getDomainTexts().put(text ,  "userNumber" , zonesPattern.getUserNumber());
+                if (domainTexts.get(text) != null) {
+                    /**
+                     * 如果域名已经存在，则判断userNumber
+                     */
+                    String userNumber = domainTexts.get(text , "userNumber");
+                    if (userNumber == zonesPattern.getUserNumber()) {
+                        domainTexts.put(text , "ip" , zonesPattern.getTargetIp());
+                    } else {
+                        return "ERROR : you have no access to control " + text;
+                    }
+                } else {
+                    customAnswerPatternProvider.getDomainTexts().put(text , "ip" , zonesPattern.getTargetIp());
+                    customAnswerPatternProvider.getDomainTexts().put(text ,  "userNumber" , zonesPattern.getUserNumber());
+                }
+
+
+
             }
 
-            return "SUCCESS, " + zonesPattern.getPatterns().size() + " patterns added.";
+            return "SUCCESS, " + zonesPattern.getTexts().size() + " patterns added.";
 
         } catch (UnknownHostException e) {
 

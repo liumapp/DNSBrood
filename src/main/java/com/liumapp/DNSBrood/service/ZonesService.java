@@ -11,6 +11,10 @@ public interface ZonesService {
 
     public int addZones(Zones zone);
 
+    public int updateZones(Zones zone);
+
     public boolean isExist(Zones zone);
+
+    public Zones getZone (String domain);
 
 }

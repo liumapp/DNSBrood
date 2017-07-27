@@ -30,6 +30,11 @@ public class ZonesServiceImpl implements ZonesService {
 
     }
 
+    @Override
+    public int updateZones(Zones zone) {
+        return zonesDAO.update(zone);
+    }
+
     /**
      * is a zone exist , judging from domain
      * @param zone
@@ -40,6 +45,11 @@ public class ZonesServiceImpl implements ZonesService {
 
         return zonesDAO.getByDomain(zone.getDomain()) != null;
 
+    }
+
+    @Override
+    public Zones getZone(String domain) {
+        return zonesDAO.getByDomain(domain);
     }
 
 }
