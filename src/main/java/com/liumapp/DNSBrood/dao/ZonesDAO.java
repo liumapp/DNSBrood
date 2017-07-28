@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
  */
 public interface ZonesDAO {
 
+    @Select("select * from zones where domain=#{domain} and userNumber=#{userNumber}")
+    public Zones getVerified(@Param("domain") String domain , @Param("userNumber") String userNumber);
+
     @Select("select * from zones where domain=#{domain}")
     public Zones getByDomain(@Param("domain") String domain);
 
@@ -27,5 +30,8 @@ public interface ZonesDAO {
 
     @Delete("delete from zones where id=#{id}")
     public int delete(Zones zone);
+
+    @Delete("delete from zones where id=#{id} and userNumber=#{userNumber}")
+    public boolean verifyDelete(Zones zone);
 
 }

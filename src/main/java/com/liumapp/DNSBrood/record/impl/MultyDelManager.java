@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  * 暂时不考虑通过正则表达式添加的记录
+ * del all dns records within specify userNumber : delete_zones_ip_LM0000000
  */
 @Service("MultyDelManager")
 public class MultyDelManager implements Manager {
@@ -60,6 +61,11 @@ public class MultyDelManager implements Manager {
             } else {
                 return "ERROR: " + zone.getDomain() + "'s userNumber is not the same with your database's userNumber";
             }
+
+            /**
+             * delete data from database
+             */
+            zonesService.deleteZone(zone);
         }
 
         return "success";

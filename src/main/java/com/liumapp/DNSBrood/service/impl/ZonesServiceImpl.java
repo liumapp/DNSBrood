@@ -57,4 +57,14 @@ public class ZonesServiceImpl implements ZonesService {
         return zonesDAO.getByUserNumber(userNumber);
     }
 
+    @Override
+    public Zones getVerifiedZone(String domain, String userNumber) {
+        return zonesDAO.getVerified(domain , userNumber);
+    }
+
+    @Override
+    public boolean deleteZone(Zones zone) {
+        return zonesDAO.verifyDelete(zone);
+    }
+
 }

@@ -19,4 +19,8 @@ public interface ZonesService {
 
     public Zones[] getZonesByUserNumber (String userNumber);
 
+    public Zones getVerifiedZone (String domain , String userNumber);
+
+    public boolean deleteZone (Zones zone);
+
 }
