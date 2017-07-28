@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
  * Created by liumapp on 7/24/17.
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
+ * 暂时不考虑通过正则表达式添加的记录
  */
 @Service("MultyDelManager")
 public class MultyDelManager implements Manager {
@@ -41,61 +42,25 @@ public class MultyDelManager implements Manager {
     @Override
     public String handle(String whatQueenSays) {
 
-        String line = StringUtils.removeStart(whatQueenSays,configure.getAddZonesIp());
+        String userNumber = StringUtils.removeStart(whatQueenSays,configure.getDeleteZonesIp());
 
         DoubleKeyMap<String , String , String> domainTexts = customAnswerPatternProvider.getDomainTexts();
 
         /**
-         * get data info from database
+         * get data info from database by userNumber
          */
-        
+        Zones[] zones = zonesService.getZonesByUserNumber(userNumber);
 
-//        try {
-
+        for (Zones zone : zones) {
             /**
-             * get data from database
+             * delete data from dnsJava
              */
-
-
-            /**
-             * remove data from dnsjava
-             */
-//            customAnswerPatternProvider.getDomainTexts().remove("127.0.0.1" , )
-
-
-            /**
-             * save to db
-             */
-//            if (!zonesService.isExist(zone)) {
-//                zonesService.addZones(zone);
-//            }
-//
-//            /**
-//             * put to dnsjava
-//             */
-//            for (Pattern pattern : zonesPattern.getPatterns()) {
-//                customAnswerPatternProvider.getDomainPatterns().put(zonesPattern.getUserIp(), pattern, zonesPattern.getTargetIp());
-//            }
-//
-//            for (String text : zonesPattern.getTexts()) {
-//                customAnswerPatternProvider.getDomainTexts().put(zonesPattern.getUserIp(), text, zonesPattern.getTargetIp());
-//            }
-//
-//
-//        } catch (UnknownHostException e) {
-//
-//
-//        }
-//
-//        String ip = StringUtils.removeStart(whatQueenSays, configure.getDeleteZonesIp());
-//
-//        if (RecordUtils.isValidIpv4Address(ip)) {
-//            customAnswerPatternProvider.getDomainPatterns().remove(ip);
-//            customAnswerPatternProvider.getDomainTexts().remove(ip);
-//            return "REMOVE SUCCESS";
-//        } else {
-//            return "ERROR, invalid ip " + ip;
-//        }
+            if (domainTexts.get(zone.getDomain() , "userNumber") == zone.getUserNumber()) {
+                domainTexts.remove(zone.getDomain());
+            } else {
+                return "ERROR: " + zone.getDomain() + "'s userNumber is not the same with your database's userNumber";
+            }
+        }
 
         return "success";
     }

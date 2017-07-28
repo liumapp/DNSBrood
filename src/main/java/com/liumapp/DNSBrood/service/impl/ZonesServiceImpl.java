@@ -52,4 +52,9 @@ public class ZonesServiceImpl implements ZonesService {
         return zonesDAO.getByDomain(domain);
     }
 
+    @Override
+    public Zones[] getZonesByUserNumber(String userNumber) {
+        return zonesDAO.getByUserNumber(userNumber);
+    }
+
 }

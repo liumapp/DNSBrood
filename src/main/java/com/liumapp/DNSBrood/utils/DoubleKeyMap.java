@@ -111,5 +111,22 @@ public class DoubleKeyMap<K1, K2, V> extends MultiKeyMapBase {
         return remove;
     }
 
+    public boolean exists (K1 key1 , K2 key2 , V value) {
+        if (get(key1) == null) {
+            return false;
+        } else {
+            if (get(key1,key2) == value) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public boolean exists (K1 key1) {
+
+        return get(key1) != null;
+
+    }
 
 }

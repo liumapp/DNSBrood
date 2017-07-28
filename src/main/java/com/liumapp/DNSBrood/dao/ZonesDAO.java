@@ -14,6 +14,9 @@ public interface ZonesDAO {
     @Select("select * from zones where domain=#{domain}")
     public Zones getByDomain(@Param("domain") String domain);
 
+    @Select("select * from zones where userNumber=#{userNumber}")
+    public Zones[] getByUserNumber(@Param("userNumber") String userNumber);
+
     @Insert("insert into zones ( `userNumber`,`domain` , `value` , `type` , `createTime` , `updateTime`) values " +
             " (#{userNumber} , #{domain} , #{value} , #{type} , #{createTime} , #{updateTime})")
     public int insert(Zones zone);

@@ -17,4 +17,6 @@ public interface ZonesService {
 
     public Zones getZone (String domain);
 
+    public Zones[] getZonesByUserNumber (String userNumber);
+
 }
