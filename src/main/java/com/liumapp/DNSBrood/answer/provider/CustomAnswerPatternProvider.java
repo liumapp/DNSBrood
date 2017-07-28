@@ -49,46 +49,53 @@ public class CustomAnswerPatternProvider implements AnswerProvider {
      * @see
      * com.liumapp.DNSBrood.answer.provider.AnswerProvider#getAnswer(java.lang.String,
      * int)
+     * 不再通过客户端IP进行分析，转而通过域名直接查询
+     * 在此处，query即为要查询的域名
      */
     @Override
     public String getAnswer(String query, int type) {
         if (type == Type.PTR) {
             return null;
         }
-        String clientIp = RequestContext.getClientIp();
-        String ip = domainTexts.get(clientIp,query);
+//        String clientIp = RequestContext.getClientIp();
+//        String ip = domainTexts.get(clientIp,query);
+        String ip = domainTexts.get(query , "ip");
         if (ip!=null){
             return ip;
         }
-        Map<Pattern, String> patternsForIp = domainPatterns.get(clientIp);
-        if (patternsForIp == null) {
-            return null;
-        }
-        for (Map.Entry<Pattern, String> entry : patternsForIp.entrySet()) {
-            Matcher matcher = entry.getKey().matcher(query);
-            if (matcher.find()) {
-                String answer = entry.getValue();
-                if (answer.equals(DO_NOTHING)) {
-                    return null;
-                }
-                if (type == Type.MX) {
-                    String fakeMXHost = fakeMXHost(query);
-                    customTempAnswerProvider.add(clientIp, fakeMXHost, Type.A, answer);
-                    return fakeMXHost;
-                }
-                if (type == Type.CNAME) {
-                    String fakeCNAMEHost = fakeCNAMEHost(query);
-                    customTempAnswerProvider.add(clientIp, fakeCNAMEHost, Type.A, answer);
-                    return fakeCNAMEHost;
-                }
-                try {
-                    customTempAnswerProvider.add(clientIp, reverseIp(answer), Type.PTR, query);
-                } catch (Throwable e) {
-                    logger.info("not a ip, ignored");
-                }
-                return answer;
-            }
-        }
+
+        /**
+         * pattern的相关内容暂时不考虑
+         */
+//        Map<Pattern, String> patternsForIp = domainPatterns.get(clientIp);
+//        if (patternsForIp == null) {
+//            return null;
+//        }
+//        for (Map.Entry<Pattern, String> entry : patternsForIp.entrySet()) {
+//            Matcher matcher = entry.getKey().matcher(query);
+//            if (matcher.find()) {
+//                String answer = entry.getValue();
+//                if (answer.equals(DO_NOTHING)) {
+//                    return null;
+//                }
+//                if (type == Type.MX) {
+//                    String fakeMXHost = fakeMXHost(query);
+//                    customTempAnswerProvider.add(clientIp, fakeMXHost, Type.A, answer);
+//                    return fakeMXHost;
+//                }
+//                if (type == Type.CNAME) {
+//                    String fakeCNAMEHost = fakeCNAMEHost(query);
+//                    customTempAnswerProvider.add(clientIp, fakeCNAMEHost, Type.A, answer);
+//                    return fakeCNAMEHost;
+//                }
+//                try {
+//                    customTempAnswerProvider.add(clientIp, reverseIp(answer), Type.PTR, query);
+//                } catch (Throwable e) {
+//                    logger.info("not a ip, ignored");
+//                }
+//                return answer;
+//            }
+//        }
         return null;
     }
 

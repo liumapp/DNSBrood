@@ -31,7 +31,9 @@ public class QueryProcesser {
      * @throws IOException
      */
     public byte[] process(byte[] queryData) throws IOException {
+
         Message query = new Message(queryData);
+
         if (logger.isDebugEnabled()) {
             logger.debug("get query "
                     + query.getQuestion().getName().toString());
@@ -39,6 +41,7 @@ public class QueryProcesser {
 
         MessageWrapper responseMessage = new MessageWrapper(new Message(query
                 .getHeader().getID()));
+
         for (Handler handler : handlerManager.getPreHandlers()) {
             boolean handle = handler.handle(new MessageWrapper(query),
                     responseMessage);
@@ -46,13 +49,16 @@ public class QueryProcesser {
                 break;
             }
         }
+
         byte[] response = null;
+
         if (responseMessage.hasRecord()) {
             response = responseMessage.getMessage().toWire();
             return response;
         }
 
         byte[] cache = cacheManager.getResponseFromCache(query);
+
         if (cache != null) {
             return cache;
         } else {
@@ -70,6 +76,7 @@ public class QueryProcesser {
                 return null;
             }
         }
+
     }
 
 }

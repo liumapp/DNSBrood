@@ -63,7 +63,6 @@ public class DelZoneManager implements Manager {
              */
             zonesService.deleteZone(zone);
 
-
         } catch (UnknownHostException e) {
 
             e.printStackTrace();
