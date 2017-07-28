@@ -57,6 +57,7 @@ public class CustomAnswerPatternProvider implements AnswerProvider {
         if (type == Type.PTR) {
             return null;
         }
+
 //        String clientIp = RequestContext.getClientIp();
 //        String ip = domainTexts.get(clientIp,query);
         String ip = domainTexts.get(query , "ip");

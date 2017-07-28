@@ -1,5 +1,6 @@
 package com.liumapp.DNSBrood.record.impl;
 
+import com.liumapp.DNSBrood.answer.provider.CustomAnswerPatternProvider;
 import com.liumapp.DNSBrood.config.Configure;
 import com.liumapp.DNSBrood.record.Manager;
 import com.liumapp.DNSBrood.utils.DoubleKeyMap;
@@ -19,13 +20,19 @@ public class SelectZoneManager implements Manager {
     @Autowired
     private Configure configure;
 
+    @Autowired
+    private CustomAnswerPatternProvider customAnswerPatternProvider;
+
     @Override
     public String handle(String whatQueenSays) {
 
         String domain = StringUtils.removeStart(whatQueenSays , configure.getSelectZonesIp());
 
-//        DoubleKeyMap
+        DoubleKeyMap<String , String , String> domainTexts = customAnswerPatternProvider.getDomainTexts();
 
-        return "success";
+        String ip = domainTexts.get(domain , "ip");
+
+        return ip;
+
     }
 }
