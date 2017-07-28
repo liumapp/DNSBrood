@@ -30,6 +30,9 @@ public class SelectZoneManager implements Manager {
 
         DoubleKeyMap<String , String , String> domainTexts = customAnswerPatternProvider.getDomainTexts();
 
+        /**
+         * 直接从map中检查
+         */
         String ip = domainTexts.get(domain , "ip");
 
         return ip;

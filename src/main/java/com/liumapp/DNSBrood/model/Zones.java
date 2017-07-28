@@ -89,6 +89,14 @@ public class Zones {
         this.type = type;
     }
 
+    public Zones(String userNumber, String domain, String value, String type, long updateTime) {
+        this.userNumber = userNumber;
+        this.domain = domain;
+        this.value = value;
+        this.type = type;
+        this.updateTime = updateTime;
+    }
+
     public Zones(String userNumber, String domain, String value, String type, long createTime, long updateTime) {
         this.userNumber = userNumber;
         this.domain = domain;
