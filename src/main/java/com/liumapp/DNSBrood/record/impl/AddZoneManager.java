@@ -64,7 +64,7 @@ public class AddZoneManager implements Manager {
                  * 不过要先检查userNumber是否相等
                  */
                 Zones tmp = zonesService.getZone(zonesPattern.getTexts().get(0));
-                if (tmp.getUserNumber() == zonesPattern.getUserNumber()) {
+                if (tmp.getUserNumber().equals(zonesPattern.getUserNumber())) {
                     zonesService.updateZones(zone);
                 } else {
                     return "ERROR: you have no access to control " + zonesPattern.getTexts().get(0);
@@ -74,7 +74,6 @@ public class AddZoneManager implements Manager {
             /**
              * put to dnsjava
              */
-
             for (String text : zonesPattern.getTexts()) {
 
                 if (domainTexts.get(text) != null) {
@@ -82,7 +81,7 @@ public class AddZoneManager implements Manager {
                      * 如果域名已经存在，则判断userNumber
                      */
                     String userNumber = domainTexts.get(text , "userNumber");
-                    if (userNumber == zonesPattern.getUserNumber()) {
+                    if (userNumber.equals(zonesPattern.getUserNumber())) {
                         domainTexts.put(text , "ip" , zonesPattern.getTargetIp());
                     } else {
                         return "ERROR : you have no access to control " + text;

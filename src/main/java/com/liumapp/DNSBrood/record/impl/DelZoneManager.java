@@ -52,7 +52,7 @@ public class DelZoneManager implements Manager {
             /**
              * delete data from dnsJava
              */
-            if (domainTexts.get(zone.getDomain() , "userNumber") == zone.getUserNumber()) {
+            if (domainTexts.get(zone.getDomain() , "userNumber").equals(zone.getUserNumber())) {
                 domainTexts.remove(zone.getDomain());
             } else {
                 return "ERROR: " + zone.getDomain() + "'s userNumber is not the same with your database's userNumber";

@@ -27,4 +27,18 @@ public class ZonesFileRefresherTest extends TestCase {
 //        }
     }
 
+    /**
+     * 需要开启远程测试来执行
+     */
+    public void testMulDel() {
+        Queen queen = new Queen();
+        try {
+            queen.connect();
+            queen.say("delete_zones_ip_LM15009643683283268");
+            System.out.print(queen.hear());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

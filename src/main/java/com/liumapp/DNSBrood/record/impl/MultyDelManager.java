@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.net.UnknownHostException;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -50,13 +51,16 @@ public class MultyDelManager implements Manager {
         /**
          * get data info from database by userNumber
          */
-        Zones[] zones = zonesService.getZonesByUserNumber(userNumber);
+        List<Zones> zones = zonesService.getZonesByUserNumber(userNumber);
 
         for (Zones zone : zones) {
+
+            if (domainTexts.get(zone.getDomain()) == null) continue;
+
             /**
              * delete data from dnsJava
              */
-            if (domainTexts.get(zone.getDomain() , "userNumber") == zone.getUserNumber()) {
+            if (domainTexts.get(zone.getDomain() , "userNumber").equals(zone.getUserNumber())) {
                 domainTexts.remove(zone.getDomain());
             } else {
                 return "ERROR: " + zone.getDomain() + "'s userNumber is not the same with your database's userNumber";

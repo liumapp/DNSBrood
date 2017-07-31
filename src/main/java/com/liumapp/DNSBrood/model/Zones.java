@@ -79,7 +79,6 @@ public class Zones {
 
     public Zones() {
 
-
     }
 
     public Zones(String userNumber, String domain, String value, String type) {

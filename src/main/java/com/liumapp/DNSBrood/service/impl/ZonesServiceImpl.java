@@ -4,8 +4,10 @@ import com.liumapp.DNSBrood.dao.ZonesDAO;
 import com.liumapp.DNSBrood.model.Zones;
 import com.liumapp.DNSBrood.service.ZonesService;
 import org.springframework.stereotype.Service;
+import org.xbill.DNS.Zone;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by liumapp on 7/19/17.
@@ -53,7 +55,7 @@ public class ZonesServiceImpl implements ZonesService {
     }
 
     @Override
-    public Zones[] getZonesByUserNumber(String userNumber) {
+    public List<Zones> getZonesByUserNumber(String userNumber) {
         return zonesDAO.getByUserNumber(userNumber);
     }
 
@@ -64,7 +66,11 @@ public class ZonesServiceImpl implements ZonesService {
 
     @Override
     public boolean deleteZone(Zones zone) {
-        return zonesDAO.verifyDelete(zone);
+        if (zonesDAO.verifyDelete(zone) == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

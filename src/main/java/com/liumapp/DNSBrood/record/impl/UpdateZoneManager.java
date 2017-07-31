@@ -51,7 +51,7 @@ public class UpdateZoneManager implements Manager {
 
             String userNumber = domainTexts.get(domain,"userNumber");
 
-            if (userNumber != zonesPattern.getUserNumber()) {
+            if (!userNumber.equals(zonesPattern.getUserNumber())) {
                 return "ERROR:" + whatQueenSays + " has no access to control ";
             }
 
