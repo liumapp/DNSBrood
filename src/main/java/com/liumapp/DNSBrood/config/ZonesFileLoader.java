@@ -126,7 +126,7 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
     /*
      * (non-Javadoc)
      *
-     * @see us.codecraft.wifesays.me.ReloadAble#reload()
+     * @see com.liumapp.DNSQueen.worker.job.ReloadAble#reload()
      */
     @Override
     public void reload() {

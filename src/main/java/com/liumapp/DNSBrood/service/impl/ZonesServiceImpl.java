@@ -60,6 +60,11 @@ public class ZonesServiceImpl implements ZonesService {
     }
 
     @Override
+    public List<Zones> findAll() {
+        return zonesDAO.findAll();
+    }
+
+    @Override
     public Zones getVerifiedZone(String domain, String userNumber) {
         return zonesDAO.getVerified(domain , userNumber);
     }

@@ -31,6 +31,18 @@ public interface ZonesDAO {
     })
     public List<Zones> getByUserNumber(@Param("userNumber") String userNumber);
 
+    @Select("select * from zones")
+    @Results({
+        @Result(property = "id" , column = "id"),
+        @Result(property = "userNumber" , column = "userNumber"),
+        @Result(property = "domain" , column = "domain"),
+        @Result(property = "value" , column = "value"),
+        @Result(property = "type" , column = "type"),
+        @Result(property = "createTime" , column = "createTime"),
+        @Result(property = "updateTime" , column = "updateTime")
+    })
+    public List<Zones> findAll();
+
     @Insert("insert into zones ( `userNumber`,`domain` , `value` , `type` , `createTime` , `updateTime`) values " +
             " (#{userNumber} , #{domain} , #{value} , #{type} , #{createTime} , #{updateTime})")
     public int insert(Zones zone);

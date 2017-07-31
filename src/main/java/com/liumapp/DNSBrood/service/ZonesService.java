@@ -21,6 +21,8 @@ public interface ZonesService {
 
     public List<Zones> getZonesByUserNumber (String userNumber);
 
+    public List<Zones> findAll();
+
     public Zones getVerifiedZone (String domain , String userNumber);
 
     public boolean deleteZone (Zones zone);
