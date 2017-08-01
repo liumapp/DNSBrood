@@ -20,13 +20,19 @@ public class UDPSocketMonitor extends Thread {
     private Logger log = Logger.getLogger(this.getClass());
 
     private InetAddress addr;
+
     private int port;
+
     private static final short udpLength = 512;
+
     private DatagramSocket socket;
+
     @Autowired
     private QueryProcesser queryProcesser;
+
     @Autowired
     private Forwarder forwarder;
+
     @Autowired
     private ThreadPools threadPools;
 

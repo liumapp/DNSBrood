@@ -57,7 +57,7 @@ public class Configure {
 
     /**
      * del all dns records within specify userNumber : delete_zones_ip_LM0000000
-     * del specify records : delete_zones_ip_LM0000000:4.5.6.7 gmail.liumapp.com
+     * del specify records : delete_zones_ip_LM0000000:4.5.6.7_gmail.liumapp.com
      */
     private static final String DELETE_ZONES_IP = "delete_zones_ip_";
 
