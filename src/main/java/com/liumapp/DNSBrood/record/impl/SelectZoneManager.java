@@ -28,6 +28,8 @@ public class SelectZoneManager implements Manager {
 
         String domain = StringUtils.removeStart(whatQueenSays , configure.getSelectZonesIp());
 
+        if (!domain.endsWith(".")) domain = domain + ".";
+
         DoubleKeyMap<String , String , String> domainTexts = customAnswerPatternProvider.getDomainTexts();
 
         /**
