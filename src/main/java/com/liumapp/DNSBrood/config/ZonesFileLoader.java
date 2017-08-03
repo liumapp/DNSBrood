@@ -61,8 +61,7 @@ public class ZonesFileLoader implements InitializingBean, ReloadAble {
             DomainPatternsContainer nsDomainPatternContainer = new DomainPatternsContainer();
             DoubleKeyMap<String, Pattern, String> customAnswerPatternsTemp = new DoubleKeyMap<String, Pattern, String>(
                     new ConcurrentHashMap<String, Map<Pattern, String>>(), LinkedHashMap.class);
-            DoubleKeyMap<String, String, String> customAnswerTextsTemp = new DoubleKeyMap<String, String, String>(
-                    new ConcurrentHashMap<String, Map<String, String>>(), HashMap.class);
+            DoubleKeyMap<String, String, String> customAnswerTextsTemp = customAnswerPatternProvider.getDomainTexts();
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
             String line = null;
             while ((line = bufferedReader.readLine()) != null) {
