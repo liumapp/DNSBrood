@@ -3,9 +3,13 @@ A DNS server based on dnsjava .
 
 ### how to use
 
+* Star the project.
+
 * create database 'brood' in mysql with utf-8 charset , and then create table from /sqlchema/mysql.sql 
 
 * copy the project in your /usr/local/src/dnsbrood .
+
+* build the project by maven (mvn install).
 
 * chmod -R 777 make.sh .
 
@@ -20,6 +24,8 @@ A DNS server based on dnsjava .
 * only support Linux/Unix System
 
 * make sure your system have rsync
+
+* you will need maven to build the project.
 
 * you will need root permission to run dnsbrood.sh , because system port of 53 require it.
 
