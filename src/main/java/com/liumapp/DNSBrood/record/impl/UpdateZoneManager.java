@@ -70,9 +70,15 @@ public class UpdateZoneManager implements Manager {
             /**
              * update database
              */
-            zone.setValue(zonesPattern.getTargetIp());
-            zone.setUpdateTime(new Date().getTime());
-            zonesService.updateZones(zone);
+            if (zone == null) {
+                // add new zone
+                Zones tmp = new Zones(zonesPattern.getUserNumber(),zonesPattern.getTexts().get(0) , zonesPattern.getTargetIp() , "A" , new Date().getTime() , new Date().getTime());
+                zonesService.addZones(zone);
+            } else {
+                zone.setValue(zonesPattern.getTargetIp());
+                zone.setUpdateTime(new Date().getTime());
+                zonesService.updateZones(zone);
+            }
 
         } catch (UnknownHostException e) {
             e.printStackTrace();
