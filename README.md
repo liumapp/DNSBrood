@@ -1,6 +1,8 @@
 # DNSBrood
 A DNS server based on dnsjava .
 
+**[中文文档](http://www.liumapp.com/articles/2017/08/16/1502876150467.html)**
+
 ### how to use
 
 * Star the project.
