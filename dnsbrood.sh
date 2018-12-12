@@ -42,6 +42,7 @@ case "$1" in
     sleep 2;
     echo "Starting DNSBrood..."
     java -jar ${JVM_OPTION} -Djava.io.tmpdir="$HOME_DIR/cache" $HOME_DIR/DNSBrood.jar -d"$HOME_DIR">> $HOME_DIR/log &
+    echo $! > $HOME_DIR/pid
     ;;
   reload)
     echo "Reloading DNSBrood"
